@@ -21,14 +21,14 @@ chi_square3 = np.sum(((nuLnus3[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[vali
 chi_square4 = np.sum(((nuLnus4[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
 
 
-# print data i wanna see
-print(f'nu_max = {max(nuLnusavg):.3e}')
+# print data I wanna see
+print(f'nuLnuvg_max = {max(nuLnusavg):.3e}')
 print(f'Chi^2_1 = {chi_square1:.3e}')
 print(f'Chi^2_2 = {chi_square2:.3e}')
 print(f'Chi^2_3 = {chi_square3:.3e}')
 print(f'Chi^2_4 = {chi_square4:.3e}')
 
-# LaTeX text rendering settings
+# render plot in LaTex
 plt.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
@@ -40,7 +40,7 @@ plt.rcParams.update({
     "ytick.labelsize": 12
 })
 
-# Plot
+# plot
 plt.figure(figsize=(14, 4))
 
 # plot luminosity lines
@@ -50,13 +50,27 @@ plt.loglog(nus, nuLnus2, color='red', linewidth=2, label=r'$L_{\nu 2}$', linesty
 plt.loglog(nus, nuLnus3, color='purple', linewidth=2, label=r'$L_{\nu 3}$', linestyle='--')
 plt.loglog(nus, nuLnus4, color='orange', linewidth=2, label=r'$L_{\nu 4}$', linestyle='--')
 
-# plot misc. lines
-# plt.axhline(y=max(nuLnusavg), color='black', linestyle='--', linewidth=1.5, label=r'$\nu_{\mathrm{max}}$')
 
 # plot limits, includes 8 orders of magnitude along with the peaks
 nu_max = max(nuLnusavg)
 plt.ylim(10**(np.log10(nu_max) - 8), 10**(np.log10(nu_max) + 1))
 plt.xlim(min(nus))
+
+# peak plotting
+peak_index = np.argmax(nuLnusavg)
+nu_peak = nus[peak_index]
+nuLnu_peak = nuLnusavg[peak_index]
+
+# Annotate the peak
+plt.annotate(
+    rf'$\nu_{{\mathrm{{max}}}} = {nu_peak:.2e}\ \mathrm{{Hz}}$',
+    xy=(nu_peak, nuLnu_peak),
+    xytext=(1.2 * nu_peak, 2 * nuLnu_peak),
+    fontsize=12
+)
+
+# misc. lines
+plt.axvline(x=nu_peak, color='grey', linestyle='--', linewidth=1.5, label=r'$\nu_{\mathrm{max}}$')
 
 # labels and legend
 plt.xlabel(r'Frequency $\nu$ (Hz)')
