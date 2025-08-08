@@ -53,8 +53,9 @@ plt.loglog(nus, nuLnus4, color='orange', linewidth=2, label=r'$L_{\nu 4}$', line
 # plot misc. lines
 # plt.axhline(y=max(nuLnusavg), color='black', linestyle='--', linewidth=1.5, label=r'$\nu_{\mathrm{max}}$')
 
-# plot limits
-plt.ylim(1e30, 1e46)
+# plot limits, includes 8 orders of magnitude along with the peaks
+nu_max = max(nuLnusavg)
+plt.ylim(10**(np.log10(nu_max) - 8), 10**(np.log10(nu_max) + 1))
 plt.xlim(min(nus))
 
 # labels and legend
