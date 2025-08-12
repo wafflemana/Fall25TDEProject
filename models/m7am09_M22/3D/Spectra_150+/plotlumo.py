@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+#constants
+ccc = 299792458
+
 # load spec data from file
 specdata = np.loadtxt('spec0150.dat')
 
@@ -21,8 +25,7 @@ chi_square3 = np.sum(((nuLnus3[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[vali
 chi_square4 = np.sum(((nuLnus4[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
 
 
-# print data I wanna see
-print(f'nuLnuvg_max = {max(nuLnusavg):.3e}')
+# print data I want to see
 print(f'Chi^2_1 = {chi_square1:.3e}')
 print(f'Chi^2_2 = {chi_square2:.3e}')
 print(f'Chi^2_3 = {chi_square3:.3e}')
@@ -43,12 +46,37 @@ plt.rcParams.update({
 # plot
 plt.figure(figsize=(14, 4))
 
+#EM bands
+bands = {
+    "X-ray": (1e-11, 1e-8),          # 0.01 nm to 10 nm
+    "UV": (1e-8, 4e-7),              # 10 nm to 400 nm
+    "Visible": (4e-7, 7e-7)          # 400 nm to 700 nm
+}
+
+colors = {
+    "X-ray": "lightblue",
+    "UV": "violet",
+    "Visible": "lightgreen"
+}
+
+ax = plt.gca()
+
+for band, (lambda_min, lambda_max) in bands.items():
+    nu_max_band = ccc / lambda_min
+    nu_min_band = ccc / lambda_max
+
+    ax.axvspan(nu_min_band, nu_max_band, color=colors[band], alpha=0.3, zorder=0)
+
+    x_center = 10 ** ((np.log10(nu_min_band) + np.log10(nu_max_band)) / 2)
+    ax.text(x_center, 1.02, band, transform=ax.get_xaxis_transform(),
+            ha='center', va='bottom', fontsize=12, color='black')
+
 # plot luminosity lines
-plt.loglog(nus, nuLnusavg, color='black', linewidth=2, label=r'$L_{\nu avg}$')
-plt.loglog(nus, nuLnus1, color='blue', linewidth=2, label=r'$L_{\nu 1}$', linestyle='--')
-plt.loglog(nus, nuLnus2, color='red', linewidth=2, label=r'$L_{\nu 2}$', linestyle='--')
-plt.loglog(nus, nuLnus3, color='purple', linewidth=2, label=r'$L_{\nu 3}$', linestyle='--')
-plt.loglog(nus, nuLnus4, color='orange', linewidth=2, label=r'$L_{\nu 4}$', linestyle='--')
+plt.loglog(nus, nuLnusavg, color='black', linewidth=2, label=r'$L_{\nu,\mathrm{avg}}$')
+plt.loglog(nus, nuLnus1, color='blue', linewidth=2, label=r'$L_{\nu,\,\theta=0}$')
+plt.loglog(nus, nuLnus2, color='red', linewidth=2, label=r'$L_{\nu,\,\theta=\pi/6}$')
+plt.loglog(nus, nuLnus3, color='purple', linewidth=2, label=r'$L_{\nu,\,\theta=\pi/3}$')
+plt.loglog(nus, nuLnus4, color='orange', linewidth=2, label=r'$L_{\nu,\,\theta=\pi/2}$')
 
 
 # plot limits, includes 8 orders of magnitude along with the peaks
@@ -61,7 +89,6 @@ peak_index = np.argmax(nuLnusavg)
 nu_peak = nus[peak_index]
 nuLnu_peak = nuLnusavg[peak_index]
 
-# Annotate the peak
 plt.annotate(
     rf'$\nu_{{\mathrm{{max}}}} = {nu_peak:.2e}\ \mathrm{{Hz}}$',
     xy=(nu_peak, nuLnu_peak),
@@ -69,7 +96,7 @@ plt.annotate(
     fontsize=12
 )
 
-# misc. lines
+
 plt.axvline(x=nu_peak, color='grey', linestyle='--', linewidth=1.5, label=r'$\nu_{\mathrm{max}}$')
 
 # labels and legend
