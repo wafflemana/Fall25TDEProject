@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import os
 import glob
 
-# Constants
+#constants
 ccc = 299792458
 
 # Paths
@@ -15,8 +15,10 @@ os.makedirs(save_dir, exist_ok=True)
 spec_files = sorted(glob.glob(os.path.join(data_dir, "spec*.dat")))
 
 for spec_path in spec_files:
+    #check if file is being processed
     print(f"Processing file: {spec_path}")
 
+    #pull data from spec files
     spec_filename = os.path.basename(spec_path)
     spec_number = ''.join(filter(str.isdigit, spec_filename))
     specdata = np.loadtxt(spec_path)
@@ -52,7 +54,7 @@ for spec_path in spec_files:
     plt.figure(figsize=(14, 4))
     ax = plt.gca()
 
-    # EM bands
+    #EM bands
     bands = {
         "X-ray": (1e-11, 1e-8),
         "UV": (1e-8, 4e-7),
@@ -80,7 +82,7 @@ for spec_path in spec_files:
 
     #plot limits
     nu_max = max(nuLnusavg)
-    plt.ylim(10**(np.log10(nu_max) - 8), 10**(np.log10(nu_max) + 1))
+    plt.ylim(1e38, 1e46)
     plt.xlim(min(nus))
 
     #plot peak
@@ -95,6 +97,7 @@ for spec_path in spec_files:
     )
     plt.axvline(x=nu_peak, color='grey', linestyle='--', linewidth=1.5, label=r'$\nu_{\mathrm{max}}$')
 
+    #figure details
     plt.xlabel(r'Frequency $\nu$ (Hz)')
     plt.ylabel(r'$\nu L_{\nu} \, (\mathrm{erg}\ \mathrm{s}^{-1})$')
     plt.legend()
