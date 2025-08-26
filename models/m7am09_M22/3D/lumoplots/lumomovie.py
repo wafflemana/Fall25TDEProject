@@ -5,8 +5,8 @@ import glob
 #saves video to specific path
 image_folder = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am09_M22\3D\lumoplots"
 save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am09_M22\3D\movies"
-output_file = "lumoplotsv1_2.mp4"
-fps = 16
+output_file = "lumoplotsv1_2_8fps.mp4"
+fps = 8
 os.makedirs(save_path, exist_ok=True)
 output_path = os.path.join(save_path, output_file)
 
