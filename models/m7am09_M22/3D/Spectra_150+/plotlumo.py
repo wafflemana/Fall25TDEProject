@@ -28,17 +28,7 @@ for spec_path in spec_files:
     nuLnus2 = specdata[:, 6]
     nuLnus3 = specdata[:, 8]
     nuLnus4 = specdata[:, 10]
-    '''
-    # Chi-squared
-    valid = np.isfinite(nuLnusavg) & (nuLnusavg > 0)
-    chi_square1 = np.sum(((nuLnus1[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
-    chi_square2 = np.sum(((nuLnus2[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
-    chi_square3 = np.sum(((nuLnus3[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
-    chi_square4 = np.sum(((nuLnus4[valid] - nuLnusavg[valid]) ** 2) / nuLnusavg[valid])
 
-    print(f"{spec_filename}: Chi^2_1 = {chi_square1:.3e}, Chi^2_2 = {chi_square2:.3e}, "
-          f"Chi^2_3 = {chi_square3:.3e}, Chi^2_4 = {chi_square4:.3e}")
-    '''
     #Latex rendering
     plt.rcParams.update({
         "text.usetex": True,

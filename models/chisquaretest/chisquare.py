@@ -6,13 +6,11 @@ import os
 ccc = 3.00 * 10**10      # speed of light [cm/s]
 sbc = 1.38 * 10**(-16)   # k_B (Boltzmann constant) [erg/K]
 hhh = 6.625 * 10**(-27)  # Planck's constant [erg*s]
+CCC = 5.879 * 10**10 #Wein displacement law proportionality constant [Hz/K]
 
-# TDE specific constants
-ttt = 2.5 * 10**4  # blackbody temperature [K]
-rrr = 3 * 10**14   # blackbody radius [cm]
 
 # load spectrum
-spec_file = np.loadtxt(r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am09_M22\3D\Spectra_150+\spec0150.dat")
+spec_file = np.loadtxt(r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am09_M22\3D\Spectra_150+\spec0150.dat")
 
 # frequencies
 nus = spec_file[:, 0]
@@ -24,8 +22,16 @@ obsv_2 = spec_file[:, 6]
 obsv_3 = spec_file[:, 8]
 obsv_4 = spec_file[:, 10]
 
+# Black Hole stuff specific constants
+scr = 2.954 * 10**22 #schwartzchild radius [cm]
+rrr = np.linspace(scr/10**10, scr, 10000)
+
+def ttt(nus, CCC): #temperature range for black body using Wein Displacement law
+    ttt = nus/CCC
+    return ttt
+
 # blackbody model function
-def nuLnubb(nus):
+def nuLnubb(nus, ttt, rrr):
     bnu = (2 * hhh * nus**3) / (ccc**2) / (np.exp((hhh * nus) / (sbc * ttt)) - 1)
     lnu = 4 * np.pi**2 * rrr**2 * bnu
     return nus * lnu
