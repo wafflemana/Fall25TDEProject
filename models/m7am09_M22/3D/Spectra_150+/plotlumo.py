@@ -81,7 +81,7 @@ for spec_path in spec_files:
     nuLnu_peak = nuLnusavg[peak_index]
     plt.annotate(
         rf'$\nu_{{\mathrm{{max}}}} = {nu_peak:.2e}\ \mathrm{{Hz}}$',
-        xy=(nu_peak, nuLnu_peak),
+        xy=(nu_peak, nuLnu_peak),52
         xytext=(1.2 * nu_peak, 2 * nuLnu_peak),
         fontsize=12
     )
