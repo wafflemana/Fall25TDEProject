@@ -1,9 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib.ticker import ScalarFormatter
 
-# === Enable LaTeX rendering ===
+#LaTex rendering
 plt.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
@@ -15,18 +14,18 @@ plt.rcParams.update({
     "ytick.labelsize": 12
 })
 
-# === Load CSV data ===
+#load csv
 csv_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\chisquaretest\chisquareresults\chisquare_results.csv"
 data = pd.read_csv(csv_path)
 
-# === Extract columns ===
+#Column data from csv
 time = data["Spec_File"]
 r_optuv = data["OptUV_Radius"]
 T_optuv = data["OptUV_Temperature"]
 r_xray = data["SoftX_Radius"]
 T_xray = data["SoftX_Temperature"]
 
-# === Create figure with 2 panels ===
+#2 panel figure
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
 
 # temperature vs t curves
