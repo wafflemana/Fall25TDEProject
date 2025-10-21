@@ -56,20 +56,6 @@ for spec_num in range(150, 451, 1):
     nus_max_optuv = nus_optuv.max()
     nuLnusavg_optuv = spec_file[optuv, 2]
 
-    tbb_optuv = nus_max_optuv / CCC
-    t_min_optuv = hhh * nus_max_optuv / (sbc * 700)
-    t_max_optuv = tbb_optuv * 100
-    ttt_optuv = np.logspace(np.log10(t_min_optuv), np.log10(t_max_optuv), 200)
-
-    best_chi = np.inf
-    best_r = best_T = None
-    for r in rrr:
-        for T in ttt_optuv:
-            expected = nuLnusbb(nus_optuv, r, T)
-            chi = chi_square(expected, nuLnusavg_optuv)
-            if chi < best_chi:
-                best_chi, best_r, best_T = chi, r, T
-
     #soft x-ray range
     softxraymin = 0.3 * 2.41799e17
     softxraymax = 10 * 2.41799e17
@@ -81,17 +67,33 @@ for spec_num in range(150, 451, 1):
     nus_max_softxray = nus_softxray.max()
     nuLnusavg_softxray = spec_file[softxray, 2]
 
+    #temperature range definition
+    tbb_optuv = nus_max_optuv / CCC
+    t_min_optuv = hhh * nus_max_optuv / (sbc * 700)
+    t_max_optuv = tbb_optuv * 100
     tbb_softxray = nus_max_softxray / CCC
     t_min_softxray = hhh * nus_max_softxray / (sbc * 700)
     t_max_softxray = tbb_softxray * 100
-    ttt_softxray = np.logspace(np.log10(t_min_softxray), np.log10(t_max_softxray), 200)
+    ttt_optuv = np.logspace(np.log10(t_min_softxray), np.log10(t_max_softxray), 200) #same as soft xray
+    ttt_softxray = np.logspace(np.log10(t_min_softxray), np.log10(t_max_softxray), 200) #same as optUV
+
+    best_chi = np.inf
+    best_r = best_T = None
+    for r in rrr:
+        for T in ttt_optuv:
+            expected = nuLnusbb(nus_optuv, r, T)
+            observed = nuLnusavg_optuv
+            chi = chi_square(expected, observed)
+            if chi < best_chi:
+                best_chi, best_r, best_T = chi, r, T
 
     best_chi_x = np.inf
     best_r_x = best_T_x = None
     for r in rrr:
         for T in ttt_softxray:
             expected_x = nuLnusbb(nus_softxray, r, T)
-            chi_x = chi_square(expected_x, nuLnusavg_softxray)
+            observed_x = nuLnusavg_softxray
+            chi_x = chi_square(expected_x, observed_x)
             if chi_x < best_chi_x:
                 best_chi_x, best_r_x, best_T_x = chi_x, r, T
 
