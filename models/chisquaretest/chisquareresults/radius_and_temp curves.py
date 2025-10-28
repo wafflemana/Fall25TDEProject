@@ -2,6 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+#constants
+ccc = 3.00 * 10**10      # speed of light [cm/s]
+sbc = 1.38 * 10**(-16)   # k_B (Boltzmann constant) [erg/K]
+hhh = 6.625 * 10**(-27)  # Planck's constant [erg*s]
+CCC = 5.879 * 10**10     #Wein displacement law proportionality constant [Hz/K]
+BHmass = 10**7 * (1.989 * 10**33) #Black hole mass [g]
+GGG =  6.67 * 10**(-8)   #Gravitational constant [cm^3/g s^2]
+rrr_g = (GGG * BHmass) / ccc**2 #Gravitational radius of the black hole
+
+
 #LaTex rendering
 plt.rcParams.update({
     "text.usetex": True,
@@ -25,10 +35,14 @@ T_optuv = data["OptUV_Temperature"]
 r_xray = data["SoftX_Radius"]
 T_xray = data["SoftX_Temperature"]
 
+#Convert radius to units of r_g
+r_optuv_rg = r_optuv / rrr_g
+r_xray_rg = r_xray / rrr_g
+
 #2 panel figure
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
 
-# temperature vs t curves
+# Temperature vs time
 ax1.plot(time, T_optuv, label=r"Optical/UV", color="blue", lw=2)
 ax1.plot(time, T_xray, label=r"Soft X-ray", color="red", lw=2)
 ax1.set_ylabel(r"$T_{\mathrm{bb}}$ (K)")
@@ -36,11 +50,11 @@ ax1.set_title(r"[Title Pending ASF]")
 ax1.legend()
 ax1.grid(True, alpha=0.3)
 
-# radius vs t curves
-ax2.plot(time, r_optuv, label=r"Optical/UV", color="blue", lw=2)
-ax2.plot(time, r_xray, label=r"Soft X-ray", color="red", lw=2)
+# Radius vs time (in r_g)
+ax2.plot(time, r_optuv_rg, label=r"Optical/UV", color="blue", lw=2)
+ax2.plot(time, r_xray_rg, label=r"Soft X-ray", color="red", lw=2)
 ax2.set_xlabel(r"$t$")
-ax2.set_ylabel(r"$R_{\mathrm{bb}}$ (cm)")
+ax2.set_ylabel(r"$R_{\mathrm{bb}}$ ($r_g$)")
 ax2.legend()
 ax2.grid(True, alpha=0.3)
 

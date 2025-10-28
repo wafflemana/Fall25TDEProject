@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
+import glob
 
 #constants
 ccc = 3.00e10      # speed of light [cm/s]
@@ -34,27 +35,26 @@ rrr = np.logspace(np.log10(r_min), np.log10(r_max), 200)  # 200 points for faste
 
 #results array
 results = []
+#load spec files
+spec_files = sorted(glob.glob(os.path.join(base_dir, "spec*.dat")))
 
 #loop through spectrum files
-for spec_num in range(150, 451, 1):
-    file_path = os.path.join(base_dir, f"spec0{spec_num}.dat")
+for spec_path in spec_files:
+    # pull data from spec files
+    spec_filename = os.path.basename(spec_path)
+    spec_num = ''.join(filter(str.isdigit, spec_filename))
+    spec_data = np.loadtxt(spec_path)
 
-    try:
-        spec_file = np.loadtxt(file_path)
-    except Exception as e:
-        print(f"Skipping {file_path} (Error: {e})")
-        continue
-
-    nus = spec_file[:, 0]
+    nus = spec_data[:, 0]
 
     #optical/UV range
     optuv = (nus >= 4e14) & (nus <= 3e16)
     nus_optuv = nus[optuv]
     if len(nus_optuv) == 0:
-        print(f"No optical/UV data in {file_path}")
+        print(f"No optical/UV data in {spec_filename}")
         continue
     nus_max_optuv = nus_optuv.max()
-    nuLnusavg_optuv = spec_file[optuv, 2]
+    nuLnusavg_optuv = spec_data[optuv, 2]
 
     #soft x-ray range
     softxraymin = 0.3 * 2.41799e17
@@ -62,10 +62,10 @@ for spec_num in range(150, 451, 1):
     softxray = (nus >= softxraymin) & (nus <= softxraymax)
     nus_softxray = nus[softxray]
     if len(nus_softxray) == 0:
-        print(f"No soft X-ray data in {file_path}")
+        print(f"No soft X-ray data in {spec_filename}")
         continue
     nus_max_softxray = nus_softxray.max()
-    nuLnusavg_softxray = spec_file[softxray, 2]
+    nuLnusavg_softxray = spec_data[softxray, 2]
 
     #temperature range definition
     tbb_optuv = nus_max_optuv / CCC
@@ -104,7 +104,7 @@ for spec_num in range(150, 451, 1):
         best_r_x, best_T_x, best_chi_x
     ])
 
-    print(f"Processed spec{spec_num}: χ²(opt/uv)={best_chi:.3e}, χ²(x-ray)={best_chi_x:.3e}")
+    print(f"Processed file: {spec_path}: χ²(opt/uv)={best_chi:.3e}, χ²(x-ray)={best_chi_x:.3e}")
 
 #save data to CSV
 df = pd.DataFrame(
