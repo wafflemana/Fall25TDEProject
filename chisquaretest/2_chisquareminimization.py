@@ -13,8 +13,8 @@ GGG = 6.67e-8      # Gravitational constant [cm^3/g/s^2]
 rrr_g = (GGG * BHmass) / ccc**2  # gravitational radius [cm]
 
 #paths
-base_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
-save_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults"
+base_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
+save_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults"
 
 #chi-square function
 def chi_square(expected, observed):

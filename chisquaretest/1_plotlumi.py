@@ -7,8 +7,8 @@ import glob
 ccc = 299792458
 
 # Paths
-data_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
-save_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\lumiplots"
+data_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
+save_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\lumiplots"
 os.makedirs(save_dir, exist_ok=True)
 
 # load spectra files

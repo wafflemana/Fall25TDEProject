@@ -26,8 +26,8 @@ plt.rcParams.update({
 })
 
 #load csv
-csv_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults\chisquare_results.csv"
-save_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquarecomparison"
+csv_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results.csv"
+save_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquarecomparison"
 data = pd.read_csv(csv_path)
 
 #Column data from csv
