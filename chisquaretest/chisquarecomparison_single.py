@@ -5,9 +5,9 @@ import os
 import glob
 
 #directories
-spec_path = r"/models/m7am09_M22/3D/Spectra_150+"
-chisquare_path = r"/models/m7am09_M22/3D/chisquareresults\chisquare_results.csv"
-save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am09_M22\chisquare comparison\comparisonplots"
+spec_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
+chisquare_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults\chisquare_results.csv"
+save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquarecomparison\comparisonplots"
 
 
 #constants
@@ -19,7 +19,7 @@ BHmass = 1e7 * (1.989e33)  # Black hole mass [g]
 GGG = 6.67e-8      # Gravitational constant [cm^3/g/s^2]
 
 #observered data
-spec_file = r"/models/m7am09_M22/3D/Spectra_150+/spec0241.dat"
+spec_file = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+\spec0150.dat"
 spec_data = np.loadtxt(spec_file)
 spec_filename = os.path.basename(spec_file)
 spec_num = ''.join(filter(str.isdigit, spec_filename))
@@ -101,9 +101,8 @@ plt.loglog(nus, optuv_curve, color='blue', linewidth=2, label=r'$L_{\mathrm{bb,o
 plt.loglog(nus, softxray_curve, color='red', linewidth=2, label=r'$L_{\mathrm{bb,softX-ray}}$', ls='--')
 
 # plot limits
-nu_max = max(nuLnusavg)
-plt.ylim(1e38, 1e46)
-plt.xlim(min(nus))
+nuLnumax = max(optuv_curve)
+plt.ylim(nuLnumax * (10 ** (-10)), nuLnumax * (10 ** 2))
 
 '''
 # plot peak

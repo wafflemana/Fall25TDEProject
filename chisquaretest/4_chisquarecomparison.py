@@ -5,9 +5,9 @@ import os
 import glob
 
 #directories
-spec_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
-chisquare_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results.csv"
-save_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquarecomparison\comparisonplots"
+spec_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
+chisquare_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results.csv"
+save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquarecomparison\comparisonplots"
 
 #constants
 ccc = 3.00e10      # speed of light [cm/s]
@@ -43,7 +43,7 @@ plt.rcParams.update({
     "ytick.labelsize": 12
 })
 
-#LOOP THAT HOE
+#loop
 spec_files = sorted(glob.glob(os.path.join(spec_path, "spec*.dat")))
 
 for spec_file in spec_files:
@@ -100,6 +100,10 @@ for spec_file in spec_files:
     plt.grid(True, which="both", ls="--", linewidth=0.5)
     plt.ylim(1e38, 1e46)
     plt.xlim(min(nus), max(nus))
+
+    #plot limits
+    nuLnumax = max(optuv_curve)
+    plt.ylim(nuLnumax * (10 ** (-10)), nuLnumax * (10 ** 2))
 
     # Save plot
     save_filename = f"{spec_num:04d}chisquarecompare.png"
