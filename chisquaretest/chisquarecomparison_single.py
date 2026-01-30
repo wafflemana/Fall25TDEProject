@@ -6,7 +6,7 @@ import glob
 
 #directories
 spec_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
-chisquare_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults\chisquare_results.csv"
+chisquare_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results.csv"
 save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquarecomparison\comparisonplots"
 
 
