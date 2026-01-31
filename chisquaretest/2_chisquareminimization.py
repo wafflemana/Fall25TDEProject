@@ -16,8 +16,8 @@ scr = (2 * GGG * BHmass) / ccc**2 #Schwartzchild radius
 L_edd = 1.26e38 * (BHmass / 1.989e33) #Eddington Luminosity
 
 # Paths
-base_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
-save_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults"
+base_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
+save_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults"
 os.makedirs(save_dir, exist_ok=True)
 
 # Functions
@@ -142,6 +142,6 @@ df = pd.DataFrame(
     ]
 )
 
-csv_path = os.path.join(save_dir, "chisquare_results_m70.9_M22.csv")
+csv_path = os.path.join(save_dir, "chisquare_results_m7am0.9_M22.csv")
 df.to_csv(csv_path, index=False)
 print(f"\nSaved results to:\n{csv_path}")

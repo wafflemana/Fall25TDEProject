@@ -5,9 +5,9 @@ import os
 import glob
 
 #directories
-spec_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\Spectra_150+"
-chisquare_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquareresults\chisquare_results.csv"
-save_path = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquarecomparison\comparisonplots"
+spec_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450"
+chisquare_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results_m7am0.9_M22.csv"
+save_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquarecomparison\comparisonplots"
 
 #constants
 ccc = 3.00e10      # speed of light [cm/s]
@@ -18,7 +18,7 @@ BHmass = 1e7 * (1.989e33)  # Black hole mass [g]
 GGG = 6.67e-8      # Gravitational constant [cm^3/g/s^2]
 
 # load chi-square data
-chisquare_data = pd.read_csv(chisquare_path)-
+chisquare_data = pd.read_csv(chisquare_path)
 
 #lbb functions
 def planck_nu(nu, T):
