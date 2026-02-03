@@ -14,7 +14,7 @@ L_edd = 1.26e38 * (BHmass / 1.989e33)
 
 
 # Load spectrum
-spec_file = np.loadtxt(r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\Spectra_150-450\spec0250.dat")
+spec_file = np.loadtxt(r"/models/m7am0.9_M22/Spectra_150+\spec0250.dat")
 nus = spec_file[:, 0]
 nuLnus = spec_file[:, 2]
 Lnus = spec_file[:, 1]

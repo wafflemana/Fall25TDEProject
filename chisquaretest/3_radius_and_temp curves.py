@@ -26,16 +26,16 @@ plt.rcParams.update({
 })
 
 #load csv
-csv_path = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquareresults\chisquare_results_m7am0.9_M22.csv"
-save_dir = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models\m7am0.9_M22\chisquarecomparison"
+csv_path = r"/models/m7a0.9_M22/OLD RESULTS\chisquare_results.csv"
+save_dir = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models\m7a0.9_M22\chisquarecomparison"
 data = pd.read_csv(csv_path)
 
 #Column data from csv
 time = data["Spec_File"]
-r_optuv = data["OptUV_Radius_cm"]
-T_optuv = data["OptUV_Temperature_K"]
-r_xray = data["SoftX_Radius_cm"]
-T_xray = data["SoftX_Temperature_K"]
+r_optuv = data["OptUV_Radius"]
+T_optuv = data["OptUV_Temperature"]
+r_xray = data["SoftX_Radius"]
+T_xray = data["SoftX_Temperature"]
 
 #Convert radius to units of r_g
 r_optuv_rg = r_optuv / rrr_g
@@ -64,7 +64,7 @@ ax2.grid(True, alpha=0.3)
 ax2.set_xticks([])
 
 #save fig and show it
-save_path = os.path.join(save_dir, f"bestfitparamsvstime_m7am0.9_M22.png")
+save_path = os.path.join(save_dir, f"bestfitparamsvst.png")
 plt.savefig(save_path, dpi=300, bbox_inches='tight')
 plt.tight_layout()
 plt.show()
