@@ -25,7 +25,7 @@ def chi_square(model, data):
 
 rrr = np.logspace(np.log10(scr / 10), np.log10(rrr_g * 3000), 300)
 
-models_base = r"C:\Users\Aviyel\PycharmProjects\Fall25TDEProject\models"
+models_base = r"C:\Users\aviye\PycharmProjects\Fall25TDEProject\models"
 models = [d for d in os.listdir(models_base)
           if os.path.isdir(os.path.join(models_base, d))]
 
